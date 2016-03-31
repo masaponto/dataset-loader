@@ -17,8 +17,7 @@ def load_qsar():
             for row in reader:
                 y = -1 if row[-1] == 'NRB' else 1
                 ys.append(y)
-                row = [float(x) for x in row[:-1]]
-                xs.append(row)
+                xs.append([float(x) for x in row[:-1]])
 
         return Bunch(data=np.array(xs),
                     target=np.array(ys),
