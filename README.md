@@ -2,5 +2,5 @@
 
 - how to install 
 ```
-from dataset_loader import load_qsar
+pip install git+https://github.com/masaponto/dataset-loader
 ```
