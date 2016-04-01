@@ -5,6 +5,7 @@ import os.path
 import csv
 import numpy as np
 from sklearn.datasets.base import Bunch
+from sklearn.datasets import load_svmlight_file
 
 
 def load_qsar():
@@ -28,8 +29,24 @@ def load_qsar():
         print('Data file not found in ' + path)
 
 
+def load_madelon():
+    path = os.path.expanduser('~/Data/')
+
+    madelon = load_svmlight_file(path + 'madelon/madelon')
+    madelon_test = load_svmlight_file(path + 'madelon/madelon.t')
+
+    xs = np.r_[madelon[0].todense(), madelon_test[0].todense()]
+    ys = np.r_[madelon[1], madelon_test[1]]
+
+    return Bunch(data=xs,
+                 target=ys,
+                 feature_names='madelon',
+                 DESCR='no')
+
+
+
 def main():
-    data = load_qsar()
+    data = load_madelon()
 
 if __name__ == "__main__":
     main()
