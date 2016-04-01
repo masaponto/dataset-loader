@@ -8,45 +8,52 @@ from sklearn.datasets.base import Bunch
 from sklearn.datasets import load_svmlight_file
 
 
-def load_qsar():
-    path = os.path.expanduser('~/Data/')
 
-    try:
-        with open(path + 'qsar/biodeg.csv') as file:
-            reader = csv.reader(file, delimiter=';',)
-            xs, ys = [], []
-            for row in reader:
-                y = -1 if row[-1] == 'NRB' else 1
-                ys.append(y)
-                xs.append([float(x) for x in row[:-1]])
+class Loader:
 
-        return Bunch(data=np.array(xs),
-                    target=np.array(ys),
-                    feature_names='qsar',
-                    DESCR='no')
+    def __init__(self, path = os.path.expanduser('~/Data/')):
+        self.path = path
 
-    except EnvironmentError:
-        print('Data file not found in ' + path)
+    def load_qsar(self):
+        try:
+            with open(self.path + 'qsar/biodeg.csv') as file:
+                reader = csv.reader(file, delimiter=';',)
+                xs, ys = [], []
+                for row in reader:
+                    y = -1 if row[-1] == 'NRB' else 1
+                    ys.append(y)
+                    xs.append([float(x) for x in row[:-1]])
+
+            return Bunch(data=np.array(xs),
+                        target=np.array(ys),
+                        feature_names='qsar',
+                        DESCR='no')
+
+        except EnvironmentError:
+            print('Data file not found in ' + self.path)
 
 
-def load_madelon():
-    path = os.path.expanduser('~/Data/')
+    def load_madelon(self):
+        try:
+            madelon = load_svmlight_file(self.path + 'madelon/madelon')
+            madelon_test = load_svmlight_file(self.path + 'madelon/madelon.t')
 
-    madelon = load_svmlight_file(path + 'madelon/madelon')
-    madelon_test = load_svmlight_file(path + 'madelon/madelon.t')
+            xs = np.r_[madelon[0].todense(), madelon_test[0].todense()]
+            ys = np.r_[madelon[1], madelon_test[1]]
 
-    xs = np.r_[madelon[0].todense(), madelon_test[0].todense()]
-    ys = np.r_[madelon[1], madelon_test[1]]
+            return Bunch(data=xs,
+                         target=ys,
+                         feature_names='madelon',
+                         DESCR='no')
 
-    return Bunch(data=xs,
-                 target=ys,
-                 feature_names='madelon',
-                 DESCR='no')
+        except EnvironmentError:
+            print('Data file not found in ' + self.path)
 
 
 
 def main():
-    data = load_madelon()
+    data = Loader().load_madelon()
+
 
 if __name__ == "__main__":
     main()
