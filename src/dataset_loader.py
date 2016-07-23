@@ -54,9 +54,24 @@ class Loader:
         except EnvironmentError:
             print('Data file not found in ' + self.path)
 
+    def load_farmads(self):
+        try:
+            farm_ads = load_svmlight_file(self.path + 'Farm Ads/farm-ads-vect')
+            xs = farm_ads[0].todense()
+            ys = farm_ads[1]
+
+            return Bunch(data=xs,
+                         target=ys,
+                         feature_names='madelon',
+                         DESCR='no')
+
+        except EnvironmentError:
+            print('Data file not found in ' + self.path)
+
 
 def main():
-    data = Loader().load_dexter()
+    #data = Loader().load_dexter()
+    data = Loader().load_farmads()
 
 if __name__ == "__main__":
     main()
