@@ -8,6 +8,6 @@ setup(
     author_email='masaponto@gmail.com',
     url='masaponto.github.io',
     install_requires=['numpy', 'scikit-learn'],
-    py_modules = ["dataset_loader"],
-    package_dir = {'': 'src'}
+    py_modules=["dataset_loader", "dexter.dexter_parser"],
+    package_dir={'': 'src'}
 )
