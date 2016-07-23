@@ -58,7 +58,7 @@ class Loader:
         try:
             farm_ads = load_svmlight_file(
                 self.path + 'Farm Ads/farm-ads-vect', n_features=54877)
-            xs = farm_ads[0].todense()
+            xs = np.array(farm_ads[0].todense())
             ys = farm_ads[1]
 
             return Bunch(data=xs,
