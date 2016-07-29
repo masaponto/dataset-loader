@@ -69,10 +69,37 @@ class Loader:
         except EnvironmentError:
             print('Data file not found in ' + self.path)
 
+    def load_gisette(self):
+        try:
+            with open(self.path + 'gisette/gisette_train.data') as file:
+                reader = csv.reader(file, delimiter=' ')
+                xs = [row[:-1] for row in reader]
+
+            with open(self.path + 'gisette/gisette_valid.data') as file:
+                reader = csv.reader(file, delimiter=' ')
+                xs = xs + [row[:-1] for row in reader]
+
+            train_path = self.path + 'gisette/gisette_train.labels'
+            valid_path = self.path + 'gisette/gisette_valid.labels'
+
+            train_ys = np.loadtxt(train_path)
+            valid_ys = np.loadtxt(valid_path)
+
+            ys = np.r_[train_ys, valid_ys]
+
+            return Bunch(data=np.array(xs),
+                         target=ys,
+                         feature_names='gisette',
+                         DESCR='no')
+
+        except EnvironmentError:
+            print('Data file not found in ' + self.path)
+
 
 def main():
     # data = Loader().load_dexter()
-    data = Loader().load_farmads()
+    #data = Loader().load_farmads()
+    data = Loader().load_gisette()
 
 if __name__ == "__main__":
     main()
