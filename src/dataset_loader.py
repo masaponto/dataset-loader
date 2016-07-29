@@ -73,11 +73,11 @@ class Loader:
         try:
             with open(self.path + 'gisette/gisette_train.data') as file:
                 reader = csv.reader(file, delimiter=' ')
-                xs = [row[:-1] for row in reader]
+                xs = [[float(e) for e in row[:-1]] for row in reader]
 
             with open(self.path + 'gisette/gisette_valid.data') as file:
                 reader = csv.reader(file, delimiter=' ')
-                xs = xs + [row[:-1] for row in reader]
+                xs = xs + [[float(e) for e in row[:-1]] for row in reader]
 
             train_path = self.path + 'gisette/gisette_train.labels'
             valid_path = self.path + 'gisette/gisette_valid.labels'
