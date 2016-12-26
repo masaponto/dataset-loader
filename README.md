@@ -1,6 +1,10 @@
-# dataset_loader
+# ml_utilities
 
-- how to install 
+- Under construction
+- Machine learning utilities for my experiment
+
+## how to install 
+
 ```
-pip install git+https://github.com/masaponto/dataset-loader
+pip install git+https://github.com/masaponto/ml_utilities
 ```
