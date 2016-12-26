@@ -1,8 +1,8 @@
 from distutils.core import setup
 
 setup(
-    name='dataset_loader',
-    version='1.0',
+    name='ml_utils',
+    version='2.0',
     description='machine learning experiment utilities for my experiment',
     author='masaponto',
     author_email='masaponto@gmail.com',
