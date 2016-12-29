@@ -61,6 +61,7 @@ def mp_cross_validation(estimator, data_set, k=5, p_num=4, scaling=False):
     p = Pool(p_num)
     func_args = [(validation, estimator, data_set.data, data_set.target, m, index, scaling) for index in range(0, n, m)]
     scores = p.map(argwrapper, func_args)
+    p.close()
 
     return np.array(scores)
 
