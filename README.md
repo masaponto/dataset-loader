@@ -8,3 +8,6 @@
 ```
 pip install git+https://github.com/masaponto/ml_utilities
 ```
+
+## License
+MIT
