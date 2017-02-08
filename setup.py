@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='ml_utils',
-    version='2.0',
+    version='2.1',
     description='machine learning experiment utilities for my experiment',
     author='masaponto',
     author_email='masaponto@gmail.com',
