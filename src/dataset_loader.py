@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.datasets.base import Bunch
 from sklearn.datasets import load_svmlight_file
 from dexter.dexter_parser import Dexter
+from sklearn.datasets import fetch_mldata
 
 
 class Loader:
