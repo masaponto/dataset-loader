@@ -95,11 +95,21 @@ class Loader:
         except EnvironmentError:
             print('Data file not found in ' + self.path)
 
+    def load_mnist(self):
+        data_set = fetch_mldata(db_name)
+        data_set.target = data_set.target + 1
+        data_set.target = np.array([int(y) for y in data_set.target])
+        return Bunch(data=data_set.data,
+                     target=data_set.target,
+                     feature_names='mnist',
+                     DESCR='no')
+
 
 def main():
     # data = Loader().load_dexter()
     #data = Loader().load_farmads()
     data = Loader().load_gisette()
+
 
 if __name__ == "__main__":
     main()
