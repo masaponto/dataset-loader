@@ -97,7 +97,7 @@ class Loader:
             print('Data file not found in ' + self.path)
 
     def load_mnist(self):
-        data_set = fetch_mldata(db_name)
+        data_set = fetch_mldata('MNIST original')
         data_set.target = data_set.target + 1
         data_set.target = np.array([int(y) for y in data_set.target])
         return Bunch(data=data_set.data,
@@ -109,7 +109,8 @@ class Loader:
 def main():
     # data = Loader().load_dexter()
     #data = Loader().load_farmads()
-    data = Loader().load_gisette()
+    #data = Loader().load_gisette()
+    data = Loader().load_mnist()
 
 
 if __name__ == "__main__":
